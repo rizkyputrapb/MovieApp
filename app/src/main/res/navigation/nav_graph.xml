@@ -7,7 +7,29 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.polinema.movieapp.HomeFragment"
+        android:name="com.polinema.movieapp.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.polinema.movieapp.movies.MoviesFragment"
+        android:label="movies_fragment"
+        tools:layout="@layout/movies_fragment" />
+    <fragment
+        android:id="@+id/tvshowFragment"
+        android:name="com.polinema.movieapp.tvshow.TvshowFragment"
+        android:label="tvshow_fragment"
+        tools:layout="@layout/tvshow_fragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.polinema.movieapp.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="movies"
+            app:argType="com.polinema.movieapp.models.Movies" />
+    </fragment>
 </navigation>

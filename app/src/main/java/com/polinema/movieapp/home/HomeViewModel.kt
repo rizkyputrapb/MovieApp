@@ -1,4 +1,4 @@
-package com.polinema.movieapp
+package com.polinema.movieapp.home
 
 import androidx.lifecycle.ViewModel
 
