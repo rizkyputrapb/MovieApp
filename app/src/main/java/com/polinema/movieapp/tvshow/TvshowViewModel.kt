@@ -4,19 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.polinema.movieapp.models.Movies
-import com.polinema.movieapp.utils.ResourceHelper
+import com.polinema.movieapp.utils.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TvshowViewModel @Inject constructor(private val dataHelper: ResourceHelper): ViewModel() {
+class TvshowViewModel @Inject constructor(moviesRepository: MoviesRepository): ViewModel() {
     var tvshowLiveData = MutableLiveData<ArrayList<Movies>>()
     var tvshowList: ArrayList<Movies> = ArrayList()
     private val _navigatetoDetail = MutableLiveData<Movies?>()
 
     init {
-        tvshowLiveData.value = tvshowList
-        populateList()
+        tvshowLiveData.postValue(moviesRepository.getTvShowData() as ArrayList<Movies>)
     }
 
     fun navigatetoDetail(): LiveData<Movies?> {
@@ -29,20 +28,5 @@ class TvshowViewModel @Inject constructor(private val dataHelper: ResourceHelper
 
     fun onTvshowDetailNavigated() {
         _navigatetoDetail.value = null
-    }
-
-    fun populateList() {
-        for (position in dataHelper.dataTVshowtitles.indices) {
-            val movies = Movies(
-                title = dataHelper.dataTVshowtitles[position],
-                poster = dataHelper.dataTvshowPosters.getResourceId(position, -1),
-                duration = dataHelper.dataTvshowDuration[position],
-                overview = dataHelper.dataTvshowOverview[position],
-                rating = dataHelper.dataTvshowRating[position],
-                genre = dataHelper.dataTvshowGenre[position],
-                releaseYear = dataHelper.dataTvshowReleaseYear[position]
-            )
-            tvshowList.add(movies)
-        }
     }
 }

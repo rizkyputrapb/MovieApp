@@ -1,6 +1,7 @@
 package com.polinema.movieapp
 
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
@@ -13,6 +14,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.google.android.material.tabs.TabLayout
 import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Rule
 import org.junit.Test
 
@@ -39,7 +41,10 @@ class MainActivityTest {
                     click()
                 )
             )
-        onView(withId(R.id.collapsingWithSub))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.detailToolbar))))
+            .check(matches(withText("A Star is Born")))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.collapsingWithSub))))
+            .check(matches(withText("2018 | Drama, Romance")))
         onView(withId(R.id.detailDuration)).check(matches(withText("2h 16m")))
         onView(withId(R.id.detailRating)).check(matches(withText("R")))
     }
@@ -65,10 +70,14 @@ class MainActivityTest {
                     click()
                 )
             )
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.detailToolbar))))
+            .check(matches(withText("Arrow")))
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.collapsingWithSub))))
+            .check(matches(withText("2012 | Crime, Drama")))
         onView(withId(R.id.detailDuration)).check(matches(withText("42m")))
         onView(withId(R.id.detailRating)).check(matches(withText("TV-14")))
     }
-    
+
     fun selectTabAtPosition(tabIndex: Int): ViewAction {
         return object : ViewAction {
             override fun getDescription() = "with tab at index $tabIndex"

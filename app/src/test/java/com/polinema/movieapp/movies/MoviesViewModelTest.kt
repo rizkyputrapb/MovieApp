@@ -1,10 +1,7 @@
 package com.polinema.movieapp.movies
 
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.polinema.movieapp.utils.ResourceHelper
+import com.polinema.movieapp.utils.MoviesRepository
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import org.junit.Before
@@ -12,21 +9,21 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
     lateinit var viewModel: MoviesViewModel
 
     @Mock
-    lateinit var mockApplicationContext: Context
+    lateinit var  moviesRepository: MoviesRepository
 
     @Before
     fun setUp() {
-        mockApplicationContext = ApplicationProvider.getApplicationContext()
-        viewModel = MoviesViewModel(ResourceHelper(mockApplicationContext))
+        viewModel = MoviesViewModel(moviesRepository)
     }
 
     @Test

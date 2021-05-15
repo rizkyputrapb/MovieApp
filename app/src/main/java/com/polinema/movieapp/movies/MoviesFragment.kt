@@ -35,7 +35,7 @@ class MoviesFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.movies_fragment, container, false)
         setupRvMovies()
-vmSetup()
+        vmSetup()
         return binding.root
     }
 
@@ -46,7 +46,8 @@ vmSetup()
         })
         moviesViewModel.navigatetoDetail().observe(viewLifecycleOwner, { movies ->
             if (movies != null) {
-                val action: NavDirections = HomeFragmentDirections.actionHomeFragmentToDetailFragment(movies)
+                val action: NavDirections =
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(movies)
                 Navigation.findNavController(requireView()).navigate(action)
                 moviesViewModel.onMovieDetailNavigated()
             }
