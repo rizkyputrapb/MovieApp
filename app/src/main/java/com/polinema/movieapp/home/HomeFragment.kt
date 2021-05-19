@@ -1,12 +1,12 @@
 package com.polinema.movieapp.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import com.polinema.movieapp.R
 import com.polinema.movieapp.databinding.HomeFragmentBinding
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
             TvshowFragment()
         )
         val tabLayout = binding.tabLayout
-        viewPagerAdapter = ViewPagerAdapter(fragmentList, lifecycle, activity?.supportFragmentManager!!)
+        viewPagerAdapter = ViewPagerAdapter(fragmentList, lifecycle, childFragmentManager)
         binding.tabPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabLayout, binding.tabPager) { tab, position ->
             tab.text = titles[position]

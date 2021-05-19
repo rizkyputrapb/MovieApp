@@ -5,6 +5,7 @@
     <string name="ratingLabel">Rating</string>
     <string name="durationLabel">Duration</string>
     <string name="overviewLabel">Overview</string>
+    <string name="streamlabel">Stream on</string>
     <string-array name="tvshowtitle">
         <item>Arrow</item>
         <item>Doom Patrol</item>

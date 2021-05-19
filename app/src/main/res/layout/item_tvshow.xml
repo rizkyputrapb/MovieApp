@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="onclick"
+            type="com.polinema.movieapp.tvshow.TvshowClickListener" />
+
+        <variable
+            name="tvshow"
+            type="com.polinema.movieapp.models.TvShows" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:onClick="@{()->onclick.onTvshowClicked(tvshow)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvShowFirstAir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="@color/teal_700"
+                    android:text="@{tvshow.first_air_date.substring(0, 4)}"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toEndOf="@+id/showOngoing"
+                    app:layout_constraintTop_toBottomOf="@+id/tvshowGenre"
+                    tools:text="2021" />
+
+                <TextView
+                    android:id="@+id/showOngoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner"
+                    android:text="@{tvshow.in_production == true ? `Ongoing` : `Finished`}"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="@+id/tvshowGenre"
+                    app:layout_constraintTop_toBottomOf="@+id/tvshowGenre"
+                    tools:text="Ongoing" />
+
+                <TextView
+                    android:id="@+id/tvshowGenre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="@color/purple_500"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="@+id/tvShowTitle"
+                    app:layout_constraintStart_toStartOf="@+id/tvShowTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShowTitle"
+                    tools:text="Drama, Action" />
+
+                <TextView
+                    android:id="@+id/tvShowTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{tvshow.name}"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:layout_constraintVertical_bias="0.5
+"
+                    tools:text="The Fault in Our Star" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    bind:imageUrl="@{tvshow.poster_path}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@drawable/poster_alita" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

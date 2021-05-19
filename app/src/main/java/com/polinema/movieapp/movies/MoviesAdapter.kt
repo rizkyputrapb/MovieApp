@@ -1,29 +1,29 @@
-package com.polinema.movieapp.utils
+package com.polinema.movieapp.movies
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.polinema.movieapp.databinding.ItemMovieBinding
 import com.polinema.movieapp.models.Movies
 
-class RVAdapter(onItemClickListener: OnItemClickListener) :
-    RecyclerView.Adapter<RVAdapter.MoviesViewHolder>() {
+class MoviesAdapter(private var onItemMovieClickListener: MovieClickListener) :
+    RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     var moviesList: List<Movies>? = null
         set(moviesList) {
             notifyDataSetChanged()
             field = moviesList
         }
 
-    private var onItemMovieClickListener = onItemClickListener
-
     class MoviesViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movies: Movies?, onItemClickListener: OnItemClickListener) {
+        fun bind(movies: Movies?, movieClickListener: MovieClickListener) {
             binding.movies = movies
-            Glide.with(itemView).load(movies?.poster).into(binding.moviePoster)
-            binding.onclick = onItemClickListener
+            Log.d("movieAdapter", "runtime: ${movies?.runtime}")
+            Log.d("movieAdapter", "poster_path: ${movies?.poster_path}")
+            val genres = movies?.genres?.map { it.name }.toString()
+            binding.movieGenre.text = genres.substring(1, genres.length - 1)
+            binding.onclick = movieClickListener
             binding.executePendingBindings()
         }
     }
@@ -41,7 +41,7 @@ class RVAdapter(onItemClickListener: OnItemClickListener) :
     }
 
     override fun getItemCount(): Int {
-        Log.d("listSize", "Size: ${moviesList?.size}")
+//        Log.d("listSize", "Size: ${moviesList?.size}")
         return moviesList?.size ?: 0
     }
 }

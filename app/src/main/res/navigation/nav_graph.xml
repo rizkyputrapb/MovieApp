@@ -30,6 +30,11 @@
         android:label="DetailFragment" >
         <argument
             android:name="movies"
-            app:argType="com.polinema.movieapp.models.Movies" />
+            app:argType="com.polinema.movieapp.models.Movies"
+            app:nullable="true" />
+        <argument
+            android:name="tvshows"
+            app:argType="com.polinema.movieapp.models.TvShows"
+            app:nullable="true" />
     </fragment>
 </navigation>
